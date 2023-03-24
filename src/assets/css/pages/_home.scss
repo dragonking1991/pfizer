@@ -6,24 +6,28 @@
   min-height: 100%;
 }
 
-.main__container {
-  position: relative;
-  z-index: 2;
-  color: #fff;
 
-  .swiper-slide {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-  }
+// // .swiper-slide {
+// //   position: relative;
+// //   width: 100vw;
+// //   height: 100vh;
+// // }
+.swiper {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99;
+  color: #fff;
 }
 
 .dashboard__pfizer {
   position: absolute;
-  top: 5vw;
-  left: 5vw;
-  max-height: 128px;
-  width: 8vw;
+  top: 3vw;
+  left: 3vw;
+  min-height: 128px;
+  max-width: 13vw;
 
   @include screen(xl) {
     top: calc(495/3840 * min(100vw));
@@ -31,14 +35,13 @@
     width: calc(309/3840 * min(100vw));
   }
 }
-
 .dashboard__zavi {
   position: absolute;
-  max-height: 128px;
-  top: 5vw;
-  right: 5vw;
-  width: 13vw ;
-
+  top: 3vw;
+  right: 3vw;
+  min-height: 128px;
+  max-width: 18vw;
+  
   @include screen(xl) {
     right: calc(168/3840 * min(100vw));
     top: calc(495/3840 * min(100vw));
@@ -48,10 +51,24 @@
 
 .dashboard__inner {
   position: absolute;
-  top: 50%;
+  top: 55%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  line-height: 1.2;
-  font-size: 5vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  img {
+    max-width: 50vw;
+    @include screen(md) {
+        max-width: 28vw;
+    }
+  }
+}
+.dashboard__param {
+  white-space: nowrap;
+  font-size: 3vw;
+  line-height: 1.3;
+  text-shadow: 0 0 10px #000;
 }

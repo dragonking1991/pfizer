@@ -1097,6 +1097,7 @@ var Slider = /*#__PURE__*/function (_BaseModule) {
         slidesPerView: 1,
         spaceBetween: 30
       });
+      console.log(this.swiper);
     }
   }]);
 

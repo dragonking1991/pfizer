@@ -8,5 +8,6 @@ export default class Slider extends BaseModule {
       slidesPerView: 1,
       spaceBetween: 30,
     })
+    console.log(this.swiper);
   }
 }
