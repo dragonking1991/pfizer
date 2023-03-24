@@ -1,6 +1,6 @@
 import BaseModule from './BaseModule'
 import Swiper from 'swiper';
-// import 'swiper/css';
+import 'swiper/swiper.min.css'
 export default class Slider extends BaseModule {
 
   register() {
