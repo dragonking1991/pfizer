@@ -20,10 +20,10 @@ export default class DisplayLeaderBoard extends BaseModule {
           listHtml += ` <li>
               <div><span class="number">${idx + 1}</span></div>
               <div class="inner">
-                <span>${user.username}</span>
-                <span class="country">${user.country || '_'}</span>
-                <span class="speciality">${user.speciality || '_'}</span>
-                <span>${user.score}</span>
+                <div><span>${user.username}</span></div>
+                <div class="country"><span>${user.country || '-'}</span></div>
+                <div class="speciality"><span>${user.speciality || '-'}</span></div>
+                <div><span>${user.score}</span></div>
               </div>
             </li>`
         }

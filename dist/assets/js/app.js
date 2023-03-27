@@ -1053,7 +1053,7 @@ var DisplayLeaderBoard = /*#__PURE__*/function (_BaseModule) {
                   var listHtml = '';
                   sortedUsers.forEach(function (user, idx) {
                     if (idx < 10) {
-                      listHtml += " <li>\n              <div><span class=\"number\">".concat(idx + 1, "</span></div>\n              <div class=\"inner\">\n                <span>").concat(user.username, "</span>\n                <span class=\"country\">").concat(user.country || '_', "</span>\n                <span class=\"speciality\">").concat(user.speciality || '_', "</span>\n                <span>").concat(user.score, "</span>\n              </div>\n            </li>");
+                      listHtml += " <li>\n              <div><span class=\"number\">".concat(idx + 1, "</span></div>\n              <div class=\"inner\">\n                <div><span>").concat(user.username, "</span></div>\n                <div class=\"country\"><span>").concat(user.country || '-', "</span></div>\n                <div class=\"speciality\"><span>").concat(user.speciality || '-', "</span></div>\n                <div><span>").concat(user.score, "</span></div>\n              </div>\n            </li>");
                     }
                   });
                   document.querySelectorAll('.leader-list').forEach(function (list) {
@@ -1210,7 +1210,6 @@ var Slider = /*#__PURE__*/function (_BaseModule) {
     value: function register() {
       this.swiper = new swiper__WEBPACK_IMPORTED_MODULE_1__.default(this.el, {
         slidesPerView: 1,
-        spaceBetween: 30,
         on: {
           slideChangeTransitionStart: function slideChangeTransitionStart() {
             var previousSlide = this.slides[this.previousIndex];
