@@ -17,6 +17,12 @@
   color: #fff;
 }
 
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .dashboard__pfizer {
   position: absolute;
   top: 3vw;
@@ -25,18 +31,17 @@
   max-width: 13vw;
 
   @include screen(xl) {
-    // top: calc(495/3840 * min(100vw));
-    // left: calc(168/3840 * min(100vw));
     width: calc(309/3840 * min(100vw));
   }
 }
+
 .dashboard__zavi {
   position: absolute;
   top: 3vw;
   right: 3vw;
   min-height: 128px;
   max-width: 18vw;
-  
+
   @include screen(xl) {
     // right: calc(168/3840 * min(100vw));
     // top: calc(495/3840 * min(100vw));
@@ -56,16 +61,19 @@
 
   img {
     max-width: 50vw;
+
     @include screen(md) {
       max-width: 28vw;
     }
   }
 }
+
 .dashboard__param {
   white-space: nowrap;
   font-size: 3vw;
   line-height: 1.3;
   text-shadow: 0 0 10px #000;
+
   @include screen(md) {
     font-size: 2.6vw;
   }

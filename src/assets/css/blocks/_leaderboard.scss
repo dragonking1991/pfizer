@@ -1,0 +1,88 @@
+.slide__leaderboard {
+  overflow: hidden;
+  border-radius: 20px;
+  background: url('../images/landing/Top_Bar.png') top center no-repeat;
+  background-size: 100% auto;
+  background-color: rgba(0, 179, 224, .15);
+  text-align: center;
+  width: 70.625vw;
+  padding: 0 3.69vw;
+
+  ul {
+    list-style: none;
+    padding: 1.5vw 0;
+  }
+
+  .country,
+  .speciality {
+    display: none;
+  }
+
+  [data-by=country] {
+    .country {
+      display: block;
+    }
+  }
+
+  [data-by=speciality] {
+    .speciality {
+      display: block;
+    }
+  }
+
+  li {
+    display: flex;
+    padding: .5vw 0;
+    color: #fff;
+    border-top: dotted rgba(0, 179, 224, 0.3);
+    flex: 1 auto;
+
+
+    &:nth-child(1) {
+      .number {
+        background: #E1B308;
+      }
+    }
+
+    &:nth-child(2) {
+      .number {
+        background: #D8E0E3;
+      }
+    }
+
+    &:nth-child(3) {
+      .number {
+        background: #D1BD71;
+      }
+    }
+
+    &:nth-child(1),
+    &:nth-child(2),
+    &:nth-child(3) {
+      .inner {
+        background: rgba(0, 179, 224, 0.15);
+      }
+    }
+  }
+
+  .inner {
+    border-radius: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 1vw;
+    padding: 0 1vw;
+    width: 100%;
+  }
+
+  .number {
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #00B3E0;
+    color: #0E4067;
+    width: calc(100*142/3840 * 0.6vw);
+    height: calc(100*142/3840 * 0.6vw);
+  }
+}
