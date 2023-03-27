@@ -1031,8 +1031,20 @@ var DisplayLeaderBoard = /*#__PURE__*/function (_BaseModule) {
 
   _createClass(DisplayLeaderBoard, [{
     key: "register",
+    value: function register() {
+      var _this = this;
+
+      var refreshTime = ~~this.el.getAttribute('data-refresh-api') || 10000;
+      console.log('refreshTime', refreshTime);
+      this.callAPI();
+      setInterval(function () {
+        _this.callAPI();
+      }, refreshTime);
+    }
+  }, {
+    key: "callAPI",
     value: function () {
-      var _register = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+      var _callAPI = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -1070,11 +1082,11 @@ var DisplayLeaderBoard = /*#__PURE__*/function (_BaseModule) {
         }, _callee);
       }));
 
-      function register() {
-        return _register.apply(this, arguments);
+      function callAPI() {
+        return _callAPI.apply(this, arguments);
       }
 
-      return register;
+      return callAPI;
     }()
   }]);
 
@@ -1169,6 +1181,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! swiper */ "./node_modules/swiper/esm/components/core/core-class.js");
 /* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! swiper */ "./node_modules/swiper/esm/components/autoplay/autoplay.js");
 /* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! swiper */ "./node_modules/swiper/esm/components/effect-fade/effect-fade.js");
+/* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! swiper */ "./node_modules/swiper/esm/components/navigation/navigation.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1209,9 +1222,14 @@ var Slider = /*#__PURE__*/function (_BaseModule) {
   _createClass(Slider, [{
     key: "register",
     value: function register() {
-      swiper__WEBPACK_IMPORTED_MODULE_1__.default.use([swiper__WEBPACK_IMPORTED_MODULE_2__.default, swiper__WEBPACK_IMPORTED_MODULE_3__.default]);
-      var swiperEl = this.el;
-      this.swiper = new swiper__WEBPACK_IMPORTED_MODULE_1__.default(swiperEl, {
+      var _this$swiper,
+          _this = this;
+
+      swiper__WEBPACK_IMPORTED_MODULE_1__.default.use([swiper__WEBPACK_IMPORTED_MODULE_2__.default, swiper__WEBPACK_IMPORTED_MODULE_3__.default, swiper__WEBPACK_IMPORTED_MODULE_4__.default]);
+      this.next = this.el.querySelector('.swiper-button-next');
+      this.prev = this.el.querySelector('.swiper-button-prev');
+      console.log(this.el, this.next, this.prev);
+      this.swiper = new swiper__WEBPACK_IMPORTED_MODULE_1__.default(this.el, {
         slidesPerView: 1,
         effect: "fade",
         spaceBetween: 30,
@@ -1221,37 +1239,43 @@ var Slider = /*#__PURE__*/function (_BaseModule) {
           pauseOnMouseEnter: false,
           waitForTransition: true
         },
-        on: {
-          slideChangeTransitionStart: function slideChangeTransitionStart() {
-            var previousSlide = this.slides[this.previousIndex];
-            var previousVideo = previousSlide.querySelector('video');
+        navigation: {
+          nextEl: this.next,
+          prevEl: this.prev
+        }
+      });
+      this.wrapper = this.el.swiper;
+      (_this$swiper = this.swiper) === null || _this$swiper === void 0 ? void 0 : _this$swiper.on('slideChange', function (event) {
+        console.log(event);
+        var previousSlide = event.slides[event.previousIndex];
+        var previousVideo = previousSlide.querySelector('video');
 
-            if (previousVideo) {
-              previousVideo.pause();
-              previousVideo.currentTime = 0;
+        if (previousVideo) {
+          previousVideo.pause();
+          previousVideo.currentTime = 0;
+        }
+
+        var currentSlide = event.slides[event.activeIndex];
+        var currentVideo = currentSlide.querySelector('video');
+        var videoTimeLimit = ~~(currentVideo === null || currentVideo === void 0 ? void 0 : currentVideo.getAttribute('data-time-limit')) || '';
+        console.log('videoTimeLimit', videoTimeLimit); // const mySlider = swiperEl.swiper
+
+        if (currentVideo) {
+          currentVideo.play();
+          currentVideo.addEventListener('ended', function (e) {
+            _this.wrapper.slideNext();
+          });
+          currentVideo.addEventListener('timeupdate', function (e) {
+            if (videoTimeLimit && currentVideo.currentTime >= videoTimeLimit) {
+              currentVideo.pause();
+              currentVideo.currentTime = 0;
+              console.log('this.wrapper', _this.wrapper, _this.el); // this.wrapper.slideNext();
+
+              console.log('this.next', _this.next);
+
+              _this.next.click();
             }
-
-            var currentSlide = this.slides[this.activeIndex];
-            var currentVideo = currentSlide.querySelector('video');
-            var mySlider = swiperEl.swiper;
-
-            if (currentVideo) {
-              currentVideo.play();
-              currentVideo.addEventListener('ended', function (e) {
-                console.log('swiperEl ended', mySlider, e);
-                mySlider.slideNext();
-              });
-              currentVideo.addEventListener('timeupdate', function (e) {
-                console.log('swiperEl timeupdate', mySlider, e);
-
-                if (currentVideo.currentTime >= 60) {
-                  currentVideo.pause();
-                  currentVideo.currentTime = 0;
-                  mySlider.slideNext();
-                }
-              });
-            }
-          }
+          });
         }
       });
     }

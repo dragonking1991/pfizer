@@ -2,7 +2,16 @@ import BaseModule from './BaseModule'
 import axios from 'axios'
 export default class DisplayLeaderBoard extends BaseModule {
 
-  async register() {
+  register() {
+    const refreshTime =  ~~(this.el.getAttribute('data-refresh-api')) || 10000
+    console.log('refreshTime',refreshTime);
+    this.callAPI()
+    setInterval(() => {
+      this.callAPI()
+    }, refreshTime)
+  }
+
+  async callAPI() {
     await axios({
       url: 'https://us-central1-test-c1a7a.cloudfunctions.net/api/v1/leaderboard/0EejNWFdxllT92ZWmByW?top=10',
       method: 'GET',
