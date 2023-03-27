@@ -6,9 +6,13 @@
 }
 
 .leaderboard__logo {
-  width: calc(100*384/3840 * 0.8vw);
   position: relative;
+  width: calc(100*384/3840 * 0.8vw);
   margin-bottom: calc(100*16/3840 * 0.8vw);
+  @media (orientation: portrait) {
+    width: calc(100*384/3840 * 1.8vw);
+    margin-bottom: calc(100*16/3840 * 1.8vw);
+  }
 
   &::before {
     content: '';

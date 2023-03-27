@@ -1167,6 +1167,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _BaseModule__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BaseModule */ "./src/assets/js/modules/BaseModule.js");
 /* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! swiper */ "./node_modules/swiper/esm/components/core/core-class.js");
+/* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! swiper */ "./node_modules/swiper/esm/components/autoplay/autoplay.js");
+/* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! swiper */ "./node_modules/swiper/esm/components/effect-fade/effect-fade.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1207,8 +1209,17 @@ var Slider = /*#__PURE__*/function (_BaseModule) {
   _createClass(Slider, [{
     key: "register",
     value: function register() {
+      swiper__WEBPACK_IMPORTED_MODULE_1__.default.use([swiper__WEBPACK_IMPORTED_MODULE_2__.default, swiper__WEBPACK_IMPORTED_MODULE_3__.default]);
       this.swiper = new swiper__WEBPACK_IMPORTED_MODULE_1__.default(this.el, {
         slidesPerView: 1,
+        effect: "fade",
+        spaceBetween: 30,
+        loop: true,
+        autoplay: {
+          delay: 10000,
+          pauseOnMouseEnter: false,
+          waitForTransition: true
+        },
         on: {
           slideChangeTransitionStart: function slideChangeTransitionStart() {
             var previousSlide = this.slides[this.previousIndex];
@@ -1216,6 +1227,7 @@ var Slider = /*#__PURE__*/function (_BaseModule) {
 
             if (previousVideo) {
               previousVideo.pause();
+              previousVideo.currentTime = 0;
             }
 
             var currentSlide = this.slides[this.activeIndex];
@@ -1223,6 +1235,9 @@ var Slider = /*#__PURE__*/function (_BaseModule) {
 
             if (currentVideo) {
               currentVideo.play();
+              currentVideo.addEventListener('ended', function () {
+                this.swiper.slideNext();
+              });
             }
           }
         }
