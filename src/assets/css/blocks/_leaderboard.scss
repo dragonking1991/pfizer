@@ -43,12 +43,18 @@
   text-align: center;
   // width: 70.625vw;
   width: calc(100*2712/3840 * 0.8vw);
-  padding: 0 3.69vw;
   padding: 0 calc(100*147/3840 * 0.8vw);
-
+  @media (orientation: portrait) {
+    width: calc(100*2712/3840 * 1.3vw);
+    padding: 0 calc(100*147/3840 * 1.3vw);
+  }
+  
   h2 {
     margin: 0;
     font-size: calc(100*88/3840 * 0.8vw);
+    @media (orientation: portrait) {
+      font-size: calc(100*88/3840 * 1.3vw);
+    }
   }
 
   ul {
@@ -80,6 +86,9 @@
     border-top: dotted rgba(0, 179, 224, 0.3);
     flex: 1 auto;
     font-size: calc(100*65/3840 * 0.8vw);
+    @media (orientation: portrait) {
+      font-size: calc(100*65/3840 * 1.3vw);
+    }
 
     &:nth-child(1) {
       .number {
@@ -142,5 +151,9 @@
     color: #0E4067;
     width: calc(100*100/3840 * 0.8vw);
     height: calc(100*100/3840 * 0.8vw);
+    @media (orientation: portrait) {
+      width: calc(100*100/3840 * 1.8vw);
+      height: calc(100*100/3840 * 1.8vw);
+    }
   }
 }

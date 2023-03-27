@@ -18,9 +18,11 @@
 
   .swiper-slide {
     opacity: 0 !important;
-  
+    z-index: 0;
+
     &.swiper-slide-active {
       opacity: 1 !important;
+      z-index: 5;
     }
   }
 }
@@ -30,8 +32,10 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
+
   video {
-     width: 100%;
+    width: 100%;
+    max-height: 100%;
   }
 }
 
@@ -43,7 +47,8 @@
   max-width: 13vw;
 
   @include screen(xl) {
-    width: calc(100*309/3840 * 0.8vw);;
+    width: calc(100*309/3840 * 0.8vw);
+    ;
   }
 }
 

@@ -1210,7 +1210,8 @@ var Slider = /*#__PURE__*/function (_BaseModule) {
     key: "register",
     value: function register() {
       swiper__WEBPACK_IMPORTED_MODULE_1__.default.use([swiper__WEBPACK_IMPORTED_MODULE_2__.default, swiper__WEBPACK_IMPORTED_MODULE_3__.default]);
-      this.swiper = new swiper__WEBPACK_IMPORTED_MODULE_1__.default(this.el, {
+      var swiperEl = this.el;
+      this.swiper = new swiper__WEBPACK_IMPORTED_MODULE_1__.default(swiperEl, {
         slidesPerView: 1,
         effect: "fade",
         spaceBetween: 30,
@@ -1232,17 +1233,27 @@ var Slider = /*#__PURE__*/function (_BaseModule) {
 
             var currentSlide = this.slides[this.activeIndex];
             var currentVideo = currentSlide.querySelector('video');
+            var mySlider = swiperEl.swiper;
 
             if (currentVideo) {
               currentVideo.play();
-              currentVideo.addEventListener('ended', function () {
-                this.swiper.slideNext();
+              currentVideo.addEventListener('ended', function (e) {
+                console.log('swiperEl ended', mySlider, e);
+                mySlider.slideNext();
+              });
+              currentVideo.addEventListener('timeupdate', function (e) {
+                console.log('swiperEl timeupdate', mySlider, e);
+
+                if (currentVideo.currentTime >= 60) {
+                  currentVideo.pause();
+                  currentVideo.currentTime = 0;
+                  mySlider.slideNext();
+                }
               });
             }
           }
         }
       });
-      console.log(this.swiper);
     }
   }]);
 
