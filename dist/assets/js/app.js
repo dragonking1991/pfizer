@@ -1053,10 +1053,9 @@ var DisplayLeaderBoard = /*#__PURE__*/function (_BaseModule) {
                   var listHtml = '';
                   sortedUsers.forEach(function (user, idx) {
                     if (idx < 10) {
-                      listHtml += " <li>\n              <div><span class=\"number\">".concat(idx + 1, "</span></div>\n              <div class=\"inner\">\n                <span>").concat(user.username, "</span>\n                <span class=\"country\">").concat(user.country, "</span>\n                <span class=\"speciality\">").concat(user.speciality, "</span>\n                <span>").concat(user.score, "</span>\n              </div>\n            </li>");
+                      listHtml += " <li>\n              <div><span class=\"number\">".concat(idx + 1, "</span></div>\n              <div class=\"inner\">\n                <span>").concat(user.username, "</span>\n                <span class=\"country\">").concat(user.country || '_', "</span>\n                <span class=\"speciality\">").concat(user.speciality || '_', "</span>\n                <span>").concat(user.score, "</span>\n              </div>\n            </li>");
                     }
                   });
-                  console.log('listHtml', listHtml, document.querySelectorAll('.leader-list'));
                   document.querySelectorAll('.leader-list').forEach(function (list) {
                     list.innerHTML = listHtml;
                   });

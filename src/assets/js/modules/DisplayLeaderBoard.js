@@ -21,14 +21,14 @@ export default class DisplayLeaderBoard extends BaseModule {
               <div><span class="number">${idx + 1}</span></div>
               <div class="inner">
                 <span>${user.username}</span>
-                <span class="country">${user.country}</span>
-                <span class="speciality">${user.speciality}</span>
+                <span class="country">${user.country || '_'}</span>
+                <span class="speciality">${user.speciality || '_'}</span>
                 <span>${user.score}</span>
               </div>
             </li>`
         }
       });
-      console.log('listHtml', listHtml, document.querySelectorAll('.leader-list'));
+
       document.querySelectorAll('.leader-list').forEach(list => {
         list.innerHTML = listHtml
       })
