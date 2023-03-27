@@ -7,6 +7,21 @@ export default class Slider extends BaseModule {
     this.swiper = new Swiper(this.el, {
       slidesPerView: 1,
       spaceBetween: 30,
+      on: {
+        slideChangeTransitionStart: function () {
+          const previousSlide = this.slides[this.previousIndex];
+          const previousVideo = previousSlide.querySelector('video');
+          if (previousVideo) {
+            previousVideo.pause();
+          }
+
+          const currentSlide = this.slides[this.activeIndex];
+          const currentVideo = currentSlide.querySelector('video');
+          if (currentVideo) {
+            currentVideo.play();
+          }
+        }
+      }
     })
     console.log(this.swiper);
   }

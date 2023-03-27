@@ -1095,7 +1095,24 @@ var Slider = /*#__PURE__*/function (_BaseModule) {
     value: function register() {
       this.swiper = new swiper__WEBPACK_IMPORTED_MODULE_1__.default(this.el, {
         slidesPerView: 1,
-        spaceBetween: 30
+        spaceBetween: 30,
+        on: {
+          slideChangeTransitionStart: function slideChangeTransitionStart() {
+            var previousSlide = this.slides[this.previousIndex];
+            var previousVideo = previousSlide.querySelector('video');
+
+            if (previousVideo) {
+              previousVideo.pause();
+            }
+
+            var currentSlide = this.slides[this.activeIndex];
+            var currentVideo = currentSlide.querySelector('video');
+
+            if (currentVideo) {
+              currentVideo.play();
+            }
+          }
+        }
       });
       console.log(this.swiper);
     }
