@@ -12,7 +12,6 @@ export default class DisplayLeaderBoard extends BaseModule {
     }).then(result => {
       const users = result.data.users
       const sortedUsers = users.sort((a, b) => b.score - a.score);
-      console.log('sortedUsers', sortedUsers);
 
       let listHtml = ''
       sortedUsers.forEach((user, idx) => {

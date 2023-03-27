@@ -1049,7 +1049,6 @@ var DisplayLeaderBoard = /*#__PURE__*/function (_BaseModule) {
                   var sortedUsers = users.sort(function (a, b) {
                     return b.score - a.score;
                   });
-                  console.log('sortedUsers', sortedUsers);
                   var listHtml = '';
                   sortedUsers.forEach(function (user, idx) {
                     if (idx < 10) {

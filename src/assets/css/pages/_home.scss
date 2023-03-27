@@ -21,6 +21,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+  video {
+     width: 100%;
+  }
 }
 
 .dashboard__pfizer {
