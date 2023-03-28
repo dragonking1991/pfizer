@@ -1,5 +1,5 @@
 import BaseModule from './BaseModule'
-import Swiper, { Autoplay } from 'swiper';
+import Swiper, { Autoplay, EffectFade } from 'swiper';
 import 'swiper/swiper.min.css'
 export default class Slider extends BaseModule {
 
@@ -16,7 +16,10 @@ export default class Slider extends BaseModule {
 
     this.swiper = new Swiper(this.el, {
       slidesPerView: 1,
-      spaceBetween: 30,
+      effect:'fade',
+      fadeEffect: {
+        crossFade: true
+      },
       loop: true,
       autoplay: {
         delay: autoSlide || 10000,

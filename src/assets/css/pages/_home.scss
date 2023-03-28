@@ -19,6 +19,11 @@
   .swiper-slide {
     opacity: 0 !important;
     z-index: 0;
+    // position: fixed;
+    // top: 0;
+    // left: 0;
+    // width: 100vh;
+    // height: 100vh;
 
     &.swiper-slide-active {
       opacity: 1 !important;
