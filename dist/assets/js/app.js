@@ -1180,8 +1180,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _BaseModule__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BaseModule */ "./src/assets/js/modules/BaseModule.js");
 /* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! swiper */ "./node_modules/swiper/esm/components/core/core-class.js");
 /* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! swiper */ "./node_modules/swiper/esm/components/autoplay/autoplay.js");
-/* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! swiper */ "./node_modules/swiper/esm/components/effect-fade/effect-fade.js");
-/* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! swiper */ "./node_modules/swiper/esm/components/navigation/navigation.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1225,23 +1223,16 @@ var Slider = /*#__PURE__*/function (_BaseModule) {
       var _this$swiper,
           _this = this;
 
-      swiper__WEBPACK_IMPORTED_MODULE_1__.default.use([swiper__WEBPACK_IMPORTED_MODULE_2__.default, swiper__WEBPACK_IMPORTED_MODULE_3__.default, swiper__WEBPACK_IMPORTED_MODULE_4__.default]);
-      this.next = this.el.querySelector('.swiper-button-next');
-      this.prev = this.el.querySelector('.swiper-button-prev');
-      console.log(this.el, this.next, this.prev);
+      swiper__WEBPACK_IMPORTED_MODULE_1__.default.use([swiper__WEBPACK_IMPORTED_MODULE_2__.default]);
       this.swiper = new swiper__WEBPACK_IMPORTED_MODULE_1__.default(this.el, {
         slidesPerView: 1,
-        effect: "fade",
+        // effect: "fade",
         spaceBetween: 30,
         loop: true,
         autoplay: {
           delay: 10000,
           pauseOnMouseEnter: false,
           waitForTransition: true
-        },
-        navigation: {
-          nextEl: this.next,
-          prevEl: this.prev
         }
       });
       this.wrapper = this.el.swiper;
@@ -1258,22 +1249,19 @@ var Slider = /*#__PURE__*/function (_BaseModule) {
         var currentSlide = event.slides[event.activeIndex];
         var currentVideo = currentSlide.querySelector('video');
         var videoTimeLimit = ~~(currentVideo === null || currentVideo === void 0 ? void 0 : currentVideo.getAttribute('data-time-limit')) || '';
-        console.log('videoTimeLimit', videoTimeLimit); // const mySlider = swiperEl.swiper
+        console.log('videoTimeLimit', videoTimeLimit);
 
         if (currentVideo) {
           currentVideo.play();
           currentVideo.addEventListener('ended', function (e) {
-            _this.wrapper.slideNext();
+            _this.swiper.slideNext();
           });
           currentVideo.addEventListener('timeupdate', function (e) {
             if (videoTimeLimit && currentVideo.currentTime >= videoTimeLimit) {
+              _this.swiper.slideNext();
+
               currentVideo.pause();
               currentVideo.currentTime = 0;
-              console.log('this.wrapper', _this.wrapper, _this.el); // this.wrapper.slideNext();
-
-              console.log('this.next', _this.next);
-
-              _this.next.click();
             }
           });
         }
