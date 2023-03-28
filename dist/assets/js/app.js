@@ -1049,7 +1049,8 @@ var DisplayLeaderBoard = /*#__PURE__*/function (_BaseModule) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
+                _context.prev = 0;
+                _context.next = 3;
                 return axios__WEBPACK_IMPORTED_MODULE_1___default()({
                   url: 'https://us-central1-test-c1a7a.cloudfunctions.net/api/v1/leaderboard/0EejNWFdxllT92ZWmByW?top=10',
                   method: 'GET',
@@ -1064,7 +1065,7 @@ var DisplayLeaderBoard = /*#__PURE__*/function (_BaseModule) {
                   var listHtml = '';
                   sortedUsers.forEach(function (user, idx) {
                     if (idx < 10) {
-                      listHtml += " <li>\n              <div><span class=\"number\">".concat(idx + 1, "</span></div>\n              <div class=\"inner\">\n                <div><span>").concat(user.username, "</span></div>\n                <div class=\"country\"><span>").concat(user.country || '-', "</span></div>\n                <div class=\"speciality\"><span>").concat(user.speciality || '-', "</span></div>\n                <div><span>").concat(user.score, "</span></div>\n              </div>\n            </li>");
+                      listHtml += " <li>\n                <div><span class=\"number\">".concat(idx + 1, "</span></div>\n                <div class=\"inner\">\n                  <div><span>").concat(user.username, "</span></div>\n                  <div class=\"country\"><span>").concat(user.country || '-', "</span></div>\n                  <div class=\"speciality\"><span>").concat(user.speciality || '-', "</span></div>\n                  <div><span>").concat(user.score, "</span></div>\n                </div>\n              </li>");
                     }
                   });
                   document.querySelectorAll('.leader-list').forEach(function (list) {
@@ -1074,12 +1075,21 @@ var DisplayLeaderBoard = /*#__PURE__*/function (_BaseModule) {
                   console.log(error);
                 });
 
-              case 2:
+              case 3:
+                _context.next = 8;
+                break;
+
+              case 5:
+                _context.prev = 5;
+                _context.t0 = _context["catch"](0);
+                console.log(_context.t0);
+
+              case 8:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee);
+        }, _callee, null, [[0, 5]]);
       }));
 
       function callAPI() {
@@ -1225,22 +1235,26 @@ var Slider = /*#__PURE__*/function (_BaseModule) {
 
       swiper__WEBPACK_IMPORTED_MODULE_1__.default.use([swiper__WEBPACK_IMPORTED_MODULE_2__.default]);
       var autoSlide = ~~this.el.getAttribute('data-autoslide') || '';
-      console.log('autoSlide', autoSlide); // const videos = this.el.querySelectorAll('video')
-      // if(window.innerWidth > 1024) {
-      //   videos.forEach(video => {
-      //     video.muted= false
-      //   });
-      // }
+      console.log('autoSlide', autoSlide);
+      var videos = this.el.querySelectorAll('video');
+      var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+      if (window.innerWidth > 1024 && !isMobile) {
+        videos.forEach(function (video) {
+          video.removeAttribute('muted');
+        });
+      }
 
       this.swiper = new swiper__WEBPACK_IMPORTED_MODULE_1__.default(this.el, {
         slidesPerView: 1,
-        effect: 'fade',
-        fadeEffect: {
-          crossFade: true
-        },
+        // effect:'fade',
+        // fadeEffect: {
+        //   crossFade: true
+        // },
         loop: true,
         autoplay: {
-          delay: autoSlide || 10000
+          delay: autoSlide || 10000,
+          stopOnLastSlide: true
         }
       });
       (_this$swiper = this.swiper) === null || _this$swiper === void 0 ? void 0 : _this$swiper.on('slideChange', function (event) {
@@ -1257,20 +1271,7 @@ var Slider = /*#__PURE__*/function (_BaseModule) {
         var videoTimeLimit = ~~(currentVideo === null || currentVideo === void 0 ? void 0 : currentVideo.getAttribute('data-time-limit')) || ''; // const btnMuted = currentSlide.querySelector('button');
 
         if (currentVideo) {
-          // Check if the device is a mobile device
-          var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-          if (isMobile) {
-            // Mute the video and enable autoplay to prevent user interaction
-            currentVideo.muted = true;
-            currentVideo.autoplay = true;
-            currentVideo.setAttribute('playsinline', '');
-            currentVideo.setAttribute('muted', '');
-          } else {
-            // Play the video with sound
-            currentVideo.play();
-          }
-
+          currentVideo.play();
           currentVideo.addEventListener('ended', function (e) {
             _this.swiper.slideNext();
           }); // btnMuted.setAttribute('data-mute', currentVideo.muted)
@@ -1285,6 +1286,10 @@ var Slider = /*#__PURE__*/function (_BaseModule) {
 
               currentVideo.pause();
               currentVideo.currentTime = 0;
+              _this.swiper.params.autoplay = {
+                delay: autoSlide || 10000,
+                stopOnLastSlide: true
+              };
             }
           });
         }

@@ -25,6 +25,10 @@
     top: 70%;
     left: 55%;
     transform: translate(-50%, -50%);
+    @media (orientation: portrait) {
+      width: calc(100*1068/3840 * 1.8vw);
+      height: calc(100*641/3840 * 1.8vw);
+    }
   }
 
   img {

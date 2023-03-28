@@ -7,22 +7,25 @@ export default class Slider extends BaseModule {
     Swiper.use([Autoplay])
     const autoSlide = ~~(this.el.getAttribute('data-autoslide')) || ''
     console.log('autoSlide', autoSlide);
-    // const videos = this.el.querySelectorAll('video')
-    // if(window.innerWidth > 1024) {
-    //   videos.forEach(video => {
-    //     video.muted= false
-    //   });
-    // }
+    const videos = this.el.querySelectorAll('video')
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    if (window.innerWidth > 1024 && !isMobile) {
+      videos.forEach(video => {
+        video.removeAttribute('muted');
+      });
+    }
 
     this.swiper = new Swiper(this.el, {
       slidesPerView: 1,
-      effect:'fade',
-      fadeEffect: {
-        crossFade: true
-      },
+      // effect:'fade',
+      // fadeEffect: {
+      //   crossFade: true
+      // },
       loop: true,
       autoplay: {
         delay: autoSlide || 10000,
+        stopOnLastSlide: true
       },
     })
 
@@ -41,33 +44,24 @@ export default class Slider extends BaseModule {
       // const btnMuted = currentSlide.querySelector('button');
 
       if (currentVideo) {
-        // Check if the device is a mobile device
-        var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-        if (isMobile) {
-          // Mute the video and enable autoplay to prevent user interaction
-          currentVideo.muted = true;
-          currentVideo.autoplay = true;
-          currentVideo.setAttribute('playsinline', '');
-          currentVideo.setAttribute('muted', '');
-        } else {
-          // Play the video with sound
-          currentVideo.play();
-        }
+        currentVideo.play();
         currentVideo.addEventListener('ended', (e) => {
           this.swiper.slideNext();
         });
-
         // btnMuted.setAttribute('data-mute', currentVideo.muted)
         // btnMuted.addEventListener('click', (e) => {
         //   btnMuted.setAttribute('data-mute', !currentVideo.muted)
         //   currentVideo.muted = !currentVideo.muted;
         // });
-
         currentVideo.addEventListener('timeupdate', (e) => {
           if (videoTimeLimit && currentVideo.currentTime >= videoTimeLimit) {
             this.swiper.slideNext();
             currentVideo.pause();
             currentVideo.currentTime = 0;
+            this.swiper.params.autoplay = {
+              delay: autoSlide || 10000,
+              stopOnLastSlide: true
+            };
           }
         });
       }
