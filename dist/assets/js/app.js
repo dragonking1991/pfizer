@@ -1180,7 +1180,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _BaseModule__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BaseModule */ "./src/assets/js/modules/BaseModule.js");
 /* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! swiper */ "./node_modules/swiper/esm/components/core/core-class.js");
 /* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! swiper */ "./node_modules/swiper/esm/components/autoplay/autoplay.js");
-/* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! swiper */ "./node_modules/swiper/esm/components/effect-fade/effect-fade.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1224,12 +1223,12 @@ var Slider = /*#__PURE__*/function (_BaseModule) {
       var _this$swiper,
           _this = this;
 
-      swiper__WEBPACK_IMPORTED_MODULE_1__.default.use([swiper__WEBPACK_IMPORTED_MODULE_2__.default, swiper__WEBPACK_IMPORTED_MODULE_3__.default]);
+      swiper__WEBPACK_IMPORTED_MODULE_1__.default.use([swiper__WEBPACK_IMPORTED_MODULE_2__.default]);
       var autoSlide = ~~this.el.getAttribute('data-autoslide') || '';
       console.log('autoSlide', autoSlide); // const videos = this.el.querySelectorAll('video')
-      // if(window.innerWidth < 1024) {
+      // if(window.innerWidth > 1024) {
       //   videos.forEach(video => {
-      //     video.setAttribute('muted', true)
+      //     video.muted= false
       //   });
       // }
 
@@ -1238,9 +1237,7 @@ var Slider = /*#__PURE__*/function (_BaseModule) {
         spaceBetween: 30,
         loop: true,
         autoplay: {
-          delay: autoSlide || 10000 // pauseOnMouseEnter: false,
-          // waitForTransition: true
-
+          delay: autoSlide || 10000
         }
       });
       (_this$swiper = this.swiper) === null || _this$swiper === void 0 ? void 0 : _this$swiper.on('slideChange', function (event) {
@@ -1254,14 +1251,31 @@ var Slider = /*#__PURE__*/function (_BaseModule) {
 
         var currentSlide = event.slides[event.activeIndex];
         var currentVideo = currentSlide.querySelector('video');
-        var videoTimeLimit = ~~(currentVideo === null || currentVideo === void 0 ? void 0 : currentVideo.getAttribute('data-time-limit')) || '';
+        var videoTimeLimit = ~~(currentVideo === null || currentVideo === void 0 ? void 0 : currentVideo.getAttribute('data-time-limit')) || ''; // const btnMuted = currentSlide.querySelector('button');
 
         if (currentVideo) {
-          console.log('currentVideo', currentVideo);
-          currentVideo.play();
+          // Check if the device is a mobile device
+          var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+          if (isMobile) {
+            // Mute the video and enable autoplay to prevent user interaction
+            currentVideo.muted = true;
+            currentVideo.autoplay = true;
+            currentVideo.setAttribute('playsinline', '');
+            currentVideo.setAttribute('muted', '');
+          } else {
+            // Play the video with sound
+            currentVideo.play();
+          }
+
           currentVideo.addEventListener('ended', function (e) {
             _this.swiper.slideNext();
-          });
+          }); // btnMuted.setAttribute('data-mute', currentVideo.muted)
+          // btnMuted.addEventListener('click', (e) => {
+          //   btnMuted.setAttribute('data-mute', !currentVideo.muted)
+          //   currentVideo.muted = !currentVideo.muted;
+          // });
+
           currentVideo.addEventListener('timeupdate', function (e) {
             if (videoTimeLimit && currentVideo.currentTime >= videoTimeLimit) {
               _this.swiper.slideNext();

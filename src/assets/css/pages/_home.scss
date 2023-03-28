@@ -53,7 +53,9 @@
     max-height: 100%;
   }
 }
-
+.slide--video {
+  background: #000;
+}
 .dashboard__pfizer {
   position: absolute;
   top: calc(100*135/3840 * 0.8vw);
