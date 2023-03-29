@@ -7,7 +7,12 @@
 </video>
 
 <!-- Slider main container -->
-<div class="swiper" data-module="Slider DisplayLeaderBoard" data-autoslide="10000" data-refresh-api="5000">
+<div
+  class="swiper"
+  data-module="Slider DisplayLeaderBoard"
+  data-autoslide="5000"
+  data-refresh-api="5000"
+>
   <!-- Additional required wrapper -->
   <div class="swiper-wrapper">
     <!-- Slides -->
@@ -43,7 +48,11 @@
         </div>
         <div class="leaderboard__slider">
           <h2>Leaderboard</h2>
-          <ul class="leader-list" data-by="country"></ul>
+          <ul class="leader-list" data-by="country">
+            <li>
+              <img src="assets/images/landing/empty.svg" alt="" style="margin:1vw auto"/>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -54,13 +63,17 @@
         </div>
         <div class="leaderboard__slider">
           <h2>Leaderboard</h2>
-          <ul class="leader-list" data-by="speciality"></ul>
+          <ul class="leader-list" data-by="speciality">
+            <li>
+              <img src="assets/images/landing/empty.svg" alt="" style="margin:1vw auto"/>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
     <div class="swiper-slide slide--video">
       {# <button data-muted="false" type="button">Mute sound</button> #}
-      <video autoplay="" playsinline="" muted=""  controls data-time-limit="60">
+      <video autoplay="" playsinline="" muted="" controls data-time-limit="60">
         <source
           src="assets/videos/Zavicefta_launch_video_220317.mp4"
           type="video/mp4"
@@ -70,7 +83,9 @@
     </div>
   </div>
 
-  {# <div class="swiper-button-next"></div>
-  <div class="swiper-button-prev"></div> #}
+  {#
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+  #}
 </div>
 {% endblock %}

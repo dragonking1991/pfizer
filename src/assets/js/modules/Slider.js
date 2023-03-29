@@ -39,8 +39,6 @@ export default class Slider extends BaseModule {
         if (window.innerWidth > 1024 && !isMobile) {
           currentVideo.muted = false;
         }
-        currentVideo.addEventListener('play', (e) => {
-        });
 
         currentVideo.addEventListener('pause', (e) => {
           console.log('pause',this.isStopAutoplay);
