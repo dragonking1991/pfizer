@@ -134,3 +134,19 @@
     font-size: calc(100*100/3840 * 0.8vw);
   }
 }
+
+.btn-play {
+  position: absolute;
+  bottom: 3vw;
+  left: 3vw;
+  border:none;
+  background:#fff;
+  color:#000;
+  border-radius: 20vw;
+  text-transform: uppercase;
+  outline: none;
+  padding: 0.5vw 3vw;
+  font-weight: bold;
+  z-index: 10;
+  pointer-events: all;
+}
