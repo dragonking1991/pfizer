@@ -36,9 +36,9 @@ export default class Slider extends BaseModule {
         this.swiper.autoplay.stop();
         this.isStopAutoplay = true
 
-        // if (window.innerWidth > 1024 && !isMobile) {
-        //   currentVideo.muted = false;
-        // }
+        if (window.innerWidth > 1024 && !isMobile) {
+          currentVideo.muted = false;
+        }
 
         currentVideo.addEventListener('pause', (e) => {
           this.isStopAutoplay && this.swiper.autoplay.start()
