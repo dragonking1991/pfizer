@@ -11,6 +11,9 @@ export default class Slider extends BaseModule {
     this.swiper = new Swiper(this.el, {
       slidesPerView: 1,
       loop: true,
+      preloadImages: true,
+      preloadVideos: true,
+      cache: true,
       autoplay: {
         delay: autoSlide || 10000,
         disableOnInteraction: false,
@@ -36,9 +39,9 @@ export default class Slider extends BaseModule {
         this.swiper.autoplay.stop();
         this.isStopAutoplay = true
 
-        if (window.innerWidth > 1024 && !isMobile) {
-          currentVideo.muted = false;
-        }
+        // if (window.innerWidth > 1024 && !isMobile) {
+        //   currentVideo.muted = false;
+        // }
 
         currentVideo.addEventListener('pause', (e) => {
           console.log('pause',this.isStopAutoplay);
