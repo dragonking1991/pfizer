@@ -1,19 +1,16 @@
 import BaseModule from './BaseModule'
-import Swiper, { Autoplay, EffectFade } from 'swiper';
+import Swiper, { Autoplay } from 'swiper';
 import 'swiper/swiper.min.css'
 export default class Slider extends BaseModule {
 
   register() {
-    Swiper.use([Autoplay, EffectFade])
+    Swiper.use([Autoplay])
     const autoSlide = ~~(this.el.getAttribute('data-autoslide')) || ''
     console.log('autoSlide', autoSlide);
 
     this.swiper = new Swiper(this.el, {
       slidesPerView: 1,
       loop: true,
-      preloadImages: true,
-      preloadVideos: true,
-      cache: true,
       autoplay: {
         delay: autoSlide || 10000,
         disableOnInteraction: false,
@@ -44,7 +41,6 @@ export default class Slider extends BaseModule {
         // }
 
         currentVideo.addEventListener('pause', (e) => {
-          console.log('pause',this.isStopAutoplay);
           this.isStopAutoplay && this.swiper.autoplay.start()
         });
         currentVideo.addEventListener('ended', (e) => {
