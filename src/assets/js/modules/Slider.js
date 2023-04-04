@@ -1,16 +1,21 @@
 import BaseModule from './BaseModule'
-import Swiper, { Autoplay } from 'swiper';
+import Swiper, { Autoplay, EffectFlip } from 'swiper';
 import 'swiper/swiper.min.css'
 export default class Slider extends BaseModule {
 
   register() {
-    Swiper.use([Autoplay])
+    Swiper.use([Autoplay, EffectFlip])
     const autoSlide = ~~(this.el.getAttribute('data-autoslide')) || ''
     console.log('autoSlide', autoSlide);
 
     this.swiper = new Swiper(this.el, {
       slidesPerView: 1,
       loop: true,
+      speed: 800,
+      effect: 'flip',
+      // fadeEffect: {
+      //   crossFade: true
+      // },
       preloadVideos: true,
       cache: true,
       autoplay: {
@@ -45,22 +50,19 @@ export default class Slider extends BaseModule {
         const promise = currentVideo.play();
         if (promise !== undefined) {
           promise.then(_ => {
-            // Autoplay started!
-            // console.log("Autoplay started!");
           }).catch(error => {
             btnPlayVideo.classList.remove('hidden')
             btnPlayVideo.addEventListener('click', (e) => {
               currentVideo.play()
               btnPlayVideo.classList.add('hidden')
             });
-            // Autoplay was prevented.
-            // Show a "Play" button so that user can start playback.
           });
         }
 
         currentVideo.addEventListener('pause', (e) => {
           this.isStopAutoplay && this.swiper.autoplay.start()
         });
+
         currentVideo.addEventListener('ended', (e) => {
           this.handleVideoEnd()
         });
@@ -76,7 +78,6 @@ export default class Slider extends BaseModule {
 
   handleVideoEnd(video) {
     if (document.fullscreenElement) {
-      console.log('fullscreenElement');
       document.exitFullscreen().then(() => {
         this.swiper.slideNext();
         this.swiper.autoplay.start();
