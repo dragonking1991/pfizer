@@ -4,11 +4,11 @@ export default class DisplayLeaderBoard extends BaseModule {
 
   register() {
     const refreshTime = ~~(this.el.getAttribute('data-refresh-api')) || 10000
-    console.log('refresh API', refreshTime);
+    // console.log('refresh API', refreshTime);
     this.callAPI()
-    setInterval(() => {
-      this.callAPI()
-    }, refreshTime)
+    // setInterval(() => {
+    //   this.callAPI()
+    // }, refreshTime)
   }
 
   async callAPI() {
