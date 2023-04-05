@@ -38,7 +38,7 @@ export default class DisplayLeaderBoard extends BaseModule {
           }
         });
 
-        document.querySelectorAll('.leader-list').forEach(list => {
+        document.querySelectorAll('.leaderboard__list').forEach(list => {
           list.innerHTML = listHtml
         })
 

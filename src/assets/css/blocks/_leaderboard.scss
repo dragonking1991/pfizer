@@ -1,14 +1,20 @@
-.slide__inner {
+.leaderboard__inner {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-top: 8vw;
+
+  @media (orientation: portrait) {
+    margin-top: 18vw;
+  }
 }
 
 .leaderboard__logo {
   position: relative;
   width: calc(100*384/3840 * 0.8vw);
   margin-bottom: calc(100*16/3840 * 0.8vw);
+
   @media (orientation: portrait) {
     width: calc(100*384/3840 * 1.8vw);
     margin-bottom: calc(100*16/3840 * 1.8vw);
@@ -25,6 +31,7 @@
     top: 50%;
     left: 55%;
     transform: translate(-50%, -50%);
+
     @media (orientation: portrait) {
       width: calc(100*1068/3840 * 1.8vw);
       height: calc(100*641/3840 * 1.8vw);
@@ -48,22 +55,39 @@
   // width: 70.625vw;
   width: calc(100*2712/3840 * 0.8vw);
   padding: 0 calc(100*147/3840 * 0.8vw);
+  // min-height: 25vw;
+
   @media (orientation: portrait) {
+    // min-height: 50vw;
     width: calc(100*2712/3840 * 1.3vw);
     padding: 0 calc(100*147/3840 * 1.3vw);
   }
-  
+
   h2 {
     margin: 0;
     font-size: calc(100*88/3840 * 0.8vw);
+
     @media (orientation: portrait) {
       font-size: calc(100*88/3840 * 1.3vw);
     }
   }
 
-  ul {
+  .leaderboard__list {
     list-style: none;
     padding: calc(100*56/3840 * 0.8vw) 0;
+    width: 100%;
+  }
+
+  .leaderboard__wrap {
+    min-height: 25vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    @media (orientation: portrait) {
+      min-height: 50vw;
+    }
   }
 
   .country,
@@ -90,6 +114,7 @@
     border-top: dotted rgba(0, 179, 224, 0.3);
     flex: 1 auto;
     font-size: calc(100*65/3840 * 0.8vw);
+
     @media (orientation: portrait) {
       font-size: calc(100*65/3840 * 1.3vw);
     }
@@ -155,6 +180,7 @@
     color: #0E4067;
     width: calc(100*100/3840 * 0.8vw);
     height: calc(100*100/3840 * 0.8vw);
+
     @media (orientation: portrait) {
       width: calc(100*100/3840 * 1.8vw);
       height: calc(100*100/3840 * 1.8vw);
