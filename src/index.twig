@@ -6,8 +6,13 @@
     Your browser does not support HTML5 video.
   </video>
 
-  <div class="main__inner" data-module="HandleShowTime" >
-    <div class="slide slide-active" data-auto="5000" data-limit="10000" data-module="DisplayLeaderBoard">
+  <div class="main__inner" data-module="HandleShowTime">
+    <div
+      class="slide slide-active"
+      data-auto="15000"
+      data-limit="120000"
+      data-module="DisplayLeaderBoard"
+    >
       <div class="slide__dashboard">
         <img
           src="assets/images/landing/Pfizer_Logo_White_RGB.svg"
@@ -51,42 +56,22 @@
         </div>
       </div>
     </div>
-  
+
     <div class="video-intro video-frame">
-      <button class="btn-play hidden">Click To Play</button>
-      <video
-        autoplay=""
-        playsinline=""
-        muted=""
-        preload="auto"
-        data-limit="60"
-      >
-        <source
-          src="assets/videos/Zavicefta_launch_video_220317.mp4"
-          type="video/mp4"
-        />
+      {# <button class="btn-play hidden">Click To Play</button> #}
+      <video autoplay="" playsinline="" muted="" preload="auto" data-limit="">
+        <source src="assets/videos/external.mp4" type="video/mp4" />
         Your browser does not support HTML5 video.
       </video>
     </div>
-  
-    <div class="video-rmk video-frame">
-      <button class="btn-play hidden">Click To Play</button>
-      <video
-        autoplay=""
-        playsinline=""
-        muted=""
-        preload="auto"
-        data-limit="60"
-      >
-        <source
-          src="assets/videos/TrimeBGVideo.mp4"
-          type="video/mp4"
-        />
+
+    <div class="video-rwe video-frame">
+      {# <button class="btn-play hidden">Click To Play</button> #}
+      <video autoplay="" playsinline="" muted="" preload="auto" data-limit="7">
+        <source src="assets/videos/TrimeBGVideo.mp4" type="video/mp4" />
         Your browser does not support HTML5 video.
       </video>
     </div>
   </div>
-
-
 </div>
 {% endblock %}

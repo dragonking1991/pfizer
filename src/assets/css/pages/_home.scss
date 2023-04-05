@@ -24,26 +24,6 @@
   z-index: 5;
 }
 
-// .swiper {
-//   position: fixed;
-//   right: 0;
-//   bottom: 0;
-//   width: 100vw;
-//   height: 100vh;
-//   z-index: 99;
-//   color: #fff;
-
-//   .swiper-slide {
-//     opacity: 0 !important;
-//     z-index: 0;
-
-//     &.swiper-slide-active {
-//       opacity: 1 !important;
-//       z-index: 5;
-//     }
-//   }
-// }
-
 .slide--video {
   background: #000;
 }
@@ -149,8 +129,6 @@
   pointer-events: all;
 }
 
-
-
 .video-frame {
   display: flex;
   justify-content: center;
@@ -222,7 +200,7 @@
   }
 
   .dashboard__inner {
-    top:25%
+    top:20%
   }
 
   .leaderboard__inner {
