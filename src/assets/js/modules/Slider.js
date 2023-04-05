@@ -35,6 +35,16 @@ export default class Slider extends BaseModule {
       },
     })
 
+    this.swiper?.on('slideChangeTransitionEnd', (event) => {
+
+      const currentSlide = event.slides[event.activeIndex];
+      const currentVideo = currentSlide.querySelector('video');
+      const btnPlayVideo = currentSlide.querySelector('button');
+      btnPlayVideo?.classList.add('hidden')
+      currentVideo && this.handleCurrentVideo(currentVideo)
+
+    })
+
     this.swiper?.on('slideChange', (event) => {
       const previousSlide = event.slides[event.previousIndex];
       if (previousSlide?.classList.contains('slide--main')) {
@@ -49,9 +59,7 @@ export default class Slider extends BaseModule {
 
       const currentSlide = event.slides[event.activeIndex];
       const currentVideo = currentSlide.querySelector('video');
-      const btnPlayVideo = currentSlide.querySelector('button');
-      btnPlayVideo?.classList.add('hidden')
-      currentVideo && this.handleCurrentVideo(currentVideo)
+      currentVideo && (currentVideo.currentTime = 0);
 
       this.timeout && clearTimeout(this.timeout)
       if (currentSlide.classList.contains('slide--main')) {
