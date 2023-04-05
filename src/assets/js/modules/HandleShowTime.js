@@ -104,7 +104,7 @@ export default class HandleShowTime extends BaseModule {
           // btnPlayVideo.classList.add('hidden')
           this.isInteracted = true
           currentVideo.play()
-          this.addSequenceTimeout()
+          // this.addSequenceTimeout()
           if (window.innerWidth > 1024 && !isMobile) {
             currentVideo && (currentVideo.muted = false);
           }
@@ -138,6 +138,7 @@ export default class HandleShowTime extends BaseModule {
   }
 
   handleVideoEnd(video) {
+    this.runSequence()
     if (document.fullscreenElement) {
       document.exitFullscreen().then(() => {
         if (video) {
